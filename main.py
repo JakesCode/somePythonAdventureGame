@@ -18,7 +18,11 @@ class Game:
                 # Some locations have items - try/except block scans locations and adds them to Location objects #
                 try:
                     itemsToAdd = data["locations"][index]["items"]
-                    print(itemsToAdd)
+                    with open('items.json') as itemsFile:
+                        itemData = json.load(itemsFile)
+                        for index in itemsToAdd:
+                            # Create Item object(s) #
+                            
                 except KeyError:
                     pass
 
@@ -36,7 +40,8 @@ class Player:
         self.health = 50
 
 class Item:
-    def __init__(self, itemName):
+    def __init__(self, id_num, itemName):
+        self.id = id_num
         self.name = itemName
 
 MainGame = Game()
