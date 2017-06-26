@@ -2,11 +2,8 @@
   "items": [
     {
       "id": 0,
-      "name": "Sword"
-    },
-    {
-      "id": 1,
-      "name": "Shield"
+      "name": "Rusty Sword",
+      "description": "It definitely hasn't stood the test of time, that's for sure."
     }
   ]
 }
