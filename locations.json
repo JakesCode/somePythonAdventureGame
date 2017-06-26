@@ -2,7 +2,8 @@
   "locations": [
     {
       "id": 0,
-      "name": "The Castle"
+      "name": "The Castle",
+      "items": [0]
     },
     {
       "id": 1,

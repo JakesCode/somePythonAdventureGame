@@ -15,6 +15,14 @@ class Game:
                 newLocation = Location(id_num = data["locations"][index]["id"], name = data["locations"][index]["name"])
                 self.locations[index] = newLocation
 
+                # Some locations have items - try/except block scans locations and adds them to Location objects #
+                try:
+                    itemsToAdd = data["locations"][index]["items"]
+                    print(itemsToAdd)
+                except KeyError:
+                    pass
+
+
 class Location:
     def __init__(self, id_num, name):
         self.id = id_num
@@ -32,5 +40,4 @@ class Item:
         self.name = itemName
 
 MainGame = Game()
-print(MainGame.locations[0].id)
 input()
