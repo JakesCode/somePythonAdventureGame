@@ -13,18 +13,21 @@ class Game:
             data = json.load(dataFile)
             for index in range(0, len(data["locations"])):
                 newLocation = Location(id_num = data["locations"][index]["id"], name = data["locations"][index]["name"])
-                self.locations[index] = newLocation
 
                 # Some locations have items - try/except block scans locations and adds them to Location objects #
                 try:
                     itemsToAdd = data["locations"][index]["items"]
                     with open('items.json') as itemsFile:
                         itemData = json.load(itemsFile)
-                        for index in itemsToAdd:
+                        for itemIndex in itemsToAdd:
                             # Create Item object(s) #
-                            
+                            newItem = Item(id_num = itemData["items"][itemIndex]["id"], itemName = itemData["items"][itemIndex]["name"])
+                            newLocation.items.append(newItem)
                 except KeyError:
                     pass
+
+                # Add to Game.locations dictionary #
+                self.locations[index] = newLocation
 
 
 class Location:
