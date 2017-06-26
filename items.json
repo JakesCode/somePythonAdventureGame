@@ -4,6 +4,11 @@
       "id": 0,
       "name": "Rusty Sword",
       "description": "It definitely hasn't stood the test of time, that's for sure."
+    },
+    {
+      "id": 1,
+      "name": "Diary",
+      "description": "A leather-bound book that you found in The Forest."
     }
   ]
 }
