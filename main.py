@@ -6,6 +6,8 @@ class Game:
         self.locations = {}
         self.player = None
         self.createLocations()
+        self.createPlayer()
+        print("Game initialised with no problems.")
 
     def createLocations(self):
         # Iterates through locations.json, dynamically creates Location objects, adds to Game.locations dictionary #
@@ -28,6 +30,11 @@ class Game:
 
                 # Add to Game.locations dictionary #
                 self.locations[index] = newLocation
+
+    def createPlayer(self):
+        # Create a Player object #
+        self.player = Player()
+        self.player.location = self.locations[self.player.position]
 
 
 class Location:
