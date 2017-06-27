@@ -26,7 +26,7 @@ class Game:
 
                             # Some items have events, too. #
                             try:
-                                events = data["locations"][index]["events"]
+                                events = itemData["items"][itemIndex]["events"]
                                 for event in events:
                                     # 'event' will be an ID that corresponds to an ID in the events.json file #
                                     with open('events.json') as eventsFile:
@@ -65,7 +65,7 @@ class Game:
     def gameLoop(self):
         while True:
             # Beginning of loop - Clear Screen #
-            s("cls")
+            #s("cls")
 
             # 1 - Update player location #
             self.player.location = self.locations[self.player.position]

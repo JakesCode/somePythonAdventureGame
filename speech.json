@@ -2,7 +2,7 @@
   "speech": [
     {
       "id": 0,
-      "characters": ["Mysterious Voice"],
+      "characters": ["f"],
       "data": {
         "0": ["Hey.... wake up! You've overslept!", "Are you alright? You look confused.", "Listen - I have to run, but just get ready, ok?"]
       }
