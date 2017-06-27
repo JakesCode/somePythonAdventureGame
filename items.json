@@ -2,13 +2,8 @@
   "items": [
     {
       "id": 0,
-      "name": "Rusty Sword",
-      "description": "It definitely hasn't stood the test of time, that's for sure."
-    },
-    {
-      "id": 1,
-      "name": "Diary",
-      "description": "A leather-bound book that you found in The Forest."
+      "name": "Old Diary",
+      "description": "A diary you found on the ground.\nYou don't know who it belongs to."
     }
   ]
 }
