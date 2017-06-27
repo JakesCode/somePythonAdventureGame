@@ -23,7 +23,7 @@ class Game:
                         for itemIndex in itemsToAdd:
                             # Create Item object(s) #
                             newItem = Item(id_num = itemData["items"][itemIndex]["id"], itemName = itemData["items"][itemIndex]["name"], itemDescription = itemData["items"][itemIndex]["description"])
-                            newLocation.items.append(newItem)
+                            newLocation.items[newItem.name.lower()] = newItem
                 except KeyError:
                     pass
 
@@ -86,27 +86,31 @@ class Game:
             self.player.location.displayItems()
 
         # TAKE #
-        if len(user) == 1 and user[0] == "take":
-            itemToTake = input("\tTake what (ID)? ")
-            try:
-                self.player.inventory[int(itemToTake)] = self.player.location.items[int(itemToTake)]
-                print("\tTook the", self.player.location.items[int(itemToTake)].name + ".")
-                # Remove from location items #
-                del self.player.location.items[int(itemToTake)]
-            except KeyError:
-                print("Can't find that item.")
-        elif len(user) > 1 and user[0] == "take":
-            # User has given the ID of an item #
-            try:
-                self.player.inventory[int(user[1])] = self.player.location.items[int(user[1])]
-                print("\tTook the", self.player.location.items[int(user[1])].name + ".")
-                # Remove from location items #
-                del self.player.location.items[int(user[1])]
-            except KeyError:
-                print("Can't find that item.")
+        if user[0] == "take":
+            # Search for item in location #
+            keyList = list(self.player.location.items.keys())
+            for item in keyList:
+                item = item.lower()
+                individualElements = item.split(' ')
+                try:
+                    if user[1] in individualElements:
+                        # Add to inventory, remove from location #
+                        self.player.inventory[item] = self.player.location.items[item]
+                        del self.player.location.items[item]
+                        print("Took the",self.player.inventory[item].name + ".\n")
+                        print("-"*len(self.player.inventory[item].description) + "----------")
+                        print(self.player.inventory[item].name)
+                        print(self.player.inventory[item].description)
+                        print("-"*len(self.player.inventory[item].description) + "----------\n")
+                except Exception as e:
+                    if len(user) == 1:
+                        print("Please specify an item.")
+                    else:
+                        print("Can't find that item.")
 
-        # INV #
-        if user[0] == "inv":
+
+        # INV / INVENTORY #
+        if user[0] in ["inv", "inventory"]:
             self.player.displayInventory()
 
 
@@ -114,7 +118,7 @@ class Location:
     def __init__(self, id_num, name):
         self.id = id_num
         self.name = name
-        self.items = []
+        self.items = {}
 
     def checkForItems(self):
         if len(self.items) > 0:
@@ -123,11 +127,11 @@ class Location:
             return False
 
     def displayItems(self):
-        for item in self.items:
-            print("-"*len(item.description) + "-")
-            print(item.id, "-", item.name)
-            print(item.description)
-            print("-"*len(item.description) + "-")
+        for item in list(self.items.keys()):
+            print("-"*len(self.items[item].description) + "-")
+            print(self.items[item].name)
+            print(self.items[item].description)
+            print("-"*len(self.items[item].description) + "-")
         if not(self.checkForItems()):
             print("No items here.")
 
@@ -148,7 +152,7 @@ class Player:
     def displayInventory(self):
         for item in self.inventory:
             print("-"*len(self.inventory[item].description) + "-")
-            print(self.inventory[item].id, "-", self.inventory[item].name)
+            print(self.inventory[item].name)
             print(self.inventory[item].description)
             print("-"*len(self.inventory[item].description) + "-")
         if len(self.inventory) == 0:
