@@ -65,7 +65,7 @@ class Game:
     def gameLoop(self):
         while True:
             # Beginning of loop - Clear Screen #
-            #s("cls")
+            s("cls")
 
             # 1 - Update player location #
             self.player.location = self.locations[self.player.position]

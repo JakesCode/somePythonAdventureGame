@@ -3,7 +3,8 @@
     {
       "id": 0,
       "name": "Small Bedroom",
-      "items": [0]
+      "items": [0],
+      "events": [0]
     }
   ]
 }

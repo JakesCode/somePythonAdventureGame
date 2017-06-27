@@ -2,9 +2,9 @@
   "speech": [
     {
       "id": 0,
-      "characters": ["f"],
+      "characters": ["Distant Voice", "Another Distant Voice"],
       "data": {
-        "0": ["Hey.... wake up! You've overslept!", "Are you alright? You look confused.", "Listen - I have to run, but just get ready, ok?"]
+        "0": ["Hey.... you alright? Wake up!"]
       }
     }
   ]

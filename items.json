@@ -3,8 +3,7 @@
     {
       "id": 0,
       "name": "Old Diary",
-      "description": "A diary you found on the ground.\nYou don't know who it belongs to.",
-      "events": [0]
+      "description": "A diary you found on the ground.\nYou don't know who it belongs to."
     }
   ]
 }
