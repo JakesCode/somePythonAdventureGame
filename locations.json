@@ -3,7 +3,8 @@
     {
       "id": 0,
       "name": "The Castle",
-      "items": [0]
+      "items": [0],
+      "events": 0
     },
     {
       "id": 1,

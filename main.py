@@ -164,6 +164,11 @@ class Item:
         self.name = itemName
         self.description = itemDescription
 
+class Event:
+    def __init__(self, id_num, eventType):
+        self.id = id_num,
+        self.type = eventType
+
 MainGame = Game()
 MainGame.gameLoop()
 input()
