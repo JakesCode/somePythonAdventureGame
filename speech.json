@@ -4,7 +4,8 @@
       "id": 0,
       "characters": ["Distant Voice", "Another Distant Voice"],
       "data": {
-        "0": ["Hey.... you alright? Wake up!"]
+        "order": [0, 1, 0, 1, 1, 0],
+        "lines": ["Hey - are you alright?", "Yeah.... where did you come from?", "....", "....", "We can't just leave him here.", "Take him back to the village.\nI'm sure someone will have a spare room."]
       }
     }
   ]

@@ -251,17 +251,16 @@ class Dialogue:
     def read(self):
         # The ID key in the data dictionary corresponds to list indices in the self.characters list. #
         lineKeys = list(self.data.keys())
-        for turn in range(0, len(self.data)):
-            for line in self.data[lineKeys[turn]]:
-                s("cls")
-                # The person saying the line #
-                lengthOfLineCalculation = len(line) - len(self.characters[int([lineKeys[turn]][0])])
-                lengthOfLine = int(round(lengthOfLineCalculation / 2))
-                print("-"*lengthOfLine + self.characters[int([lineKeys[turn]][0])] + "-"*lengthOfLine)
-                # The line #
-                print(line, "\n")
-                offset = round(len(self.characters[int([lineKeys[turn]][0])]))/4+1
-                input(' '*int(round(lengthOfLine+offset)) + "(cont.)")
+        for turn in range(0, len(self.data["lines"])):
+            s("cls")
+            # The person saying the line #
+            lengthOfLineCalculation = len(self.data["lines"][turn]) - len(self.characters[self.data["order"][turn]])
+            lengthOfLine = int(round(lengthOfLineCalculation / 2))
+            print("-"*lengthOfLine + self.characters[self.data["order"][turn]] + "-"*lengthOfLine)
+            # The line #
+            print(self.data["lines"][turn], "\n")
+            offset = round(len(self.characters[self.data["order"][turn]])/4+1)
+            input(' '*int(round(lengthOfLine+offset)) + "(cont.)")
 
 
 s("title Some Python Adventure Game")
