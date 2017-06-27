@@ -4,9 +4,7 @@
       "id": 0,
       "characters": ["Mysterious Voice"],
       "data": {
-        "0": "Hey.... wake up! You've overslept!",
-        "0": "Are you alright? You look confused.",
-        "0": "Listen - I have to run, but just get ready, ok?",
+        "0": ["Hey.... wake up! You've overslept!", "Are you alright? You look confused.", "Listen - I have to run, but just get ready, ok?"]
       }
     }
   ]

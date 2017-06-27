@@ -2,7 +2,9 @@
   "events": [
     {
       "id": 0,
-      "speech": 0
+      "data": {
+        "speech": 0
+      }
     }
   ]
 }

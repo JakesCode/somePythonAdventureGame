@@ -2,17 +2,8 @@
   "locations": [
     {
       "id": 0,
-      "name": "The Castle",
-      "items": [0],
-      "events": 0
-    },
-    {
-      "id": 1,
-      "name": "The Forest"
-    },
-    {
-      "id": 2,
-      "name": "The Woodland"
+      "name": "Small Bedroom",
+      "items": [0]
     }
   ]
 }
