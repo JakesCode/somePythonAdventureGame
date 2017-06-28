@@ -65,6 +65,14 @@ class Game:
                         with open('people.json') as peopleFile:
                             peopleData = json.load(peopleFile)["people"]
                             newPerson = Person(id_num=peopleData[person]["id"], name=peopleData[person]["name"], events=peopleData[person]["events"])
+
+                            events = peopleData[person]["events"]
+                            with open('events.json') as eventsFile:
+                                eventsData = json.load(eventsFile)["events"]
+                                # Add the linked event to the newLocation object #
+                                newEvent = Event(id_num=eventsData[peopleData[person]["events"][0]]["id"], data=eventsData[peopleData[person]["events"][0]]["data"])
+                                newPerson.events[person] = newEvent
+
                             newLocation.people.append(newPerson)
                 except:
                     pass
@@ -165,10 +173,14 @@ class Game:
                         print("Can't find that item.")
 
         # TALK TO #
-        if user[0] == "talk" and user[1] == "to":
-            for person in range(0, len(self.player.location.people)):
-                if user[2] in list(self.player.location.people[person].name[person].lower().split(" ")):
-                    print("bingo")
+        try:
+            if user[0] == "talk" and user[1] == "to":
+                for person in range(0, len(self.player.location.people)):
+                    if user[2] in list(self.player.location.people[person].name[person].lower().split(" ")):
+                        for event in self.player.location.people[person].events:
+                            self.player.location.people[person].runEvents()
+        except IndexError:
+            pass
 
         # INV / INVENTORY #
         if user[0] in ["inv", "inventory"]:
@@ -223,9 +235,10 @@ class Location:
 
 class Player:
     def __init__(self):
-        self.position = 0
+        self.position = 2
         self.location = None
         self.inventory = {}
+        self.quests = []
 
     def displayInventory(self):
         for item in self.inventory:
@@ -252,7 +265,6 @@ class Item:
         # Events have completed - remove from events dictionary to avoid it happening multiple times #
         self.events.clear()
 
-
 class Event:
     def __init__(self, id_num, data):
         self.id = id_num
@@ -264,6 +276,13 @@ class Event:
             with open('speech.json') as speechFile:
                 speechData = json.load(speechFile)["speech"][self.id]
                 DialogueEvent = Dialogue(id_num=speechData["id"], characters=speechData["characters"], data=speechData["data"])
+        elif eventType == "give":
+            # This is where the player needs to give an item to a person #
+            print("Begin give event")
+            with open('give.json') as giveFile:
+                giveData = json.load(giveFile)["give"][self.data[eventType]]
+                NewQuest = Quest(id_num=giveData["id"], required_items=giveData["required_items"])
+                print(NewQuest)
 
 class Dialogue:
     def __init__(self, id_num, characters, data):
@@ -290,9 +309,19 @@ class Dialogue:
 
 class Person:
     def __init__(self, id_num, name, events):
-        self.id = id_num,
-        self.name = name,
+        self.id = id_num
+        self.name = name
         self.events = events
+
+    def runEvents(self):
+        for event in self.events:
+            for singleEvent in list(event.data.keys()):
+                event.execute(singleEvent)
+
+class Quest:
+    def __init__(self, id_num, required_items):
+        self.id = id_num
+        self.required_items = []
 
 
 s("title Some Python Adventure Game")

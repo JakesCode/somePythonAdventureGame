@@ -4,7 +4,6 @@
       "id": 0,
       "name": "Bayrick Tavern - Bar",
       "items": [0],
-      "events": [0],
       "directions" : {
         "left": 1,
         "right": 2
