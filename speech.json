@@ -2,10 +2,14 @@
   "speech": [
     {
       "id": 0,
-      "characters": ["Distant Voice", "Another Distant Voice"],
+      "characters": ["Barman"],
       "data": {
-        "order": [0, 1, 0, 1, 1, 0],
-        "lines": ["Hey - are you alright?", "Yeah.... where did you come from?", "....", "....", "We can't just leave him here.", "Take him back to the village.\nI'm sure someone will have a spare room."]
+        "order": [0, 0, 0, 0, 0],
+        "lines": ["What's it gonna be, huh? The usual?",
+          "....I know that look. Ya been training an' it ain't goin well, eh?",
+          "I gets ya. I used to train in these parts but - this is a cushier job.",
+          "I'd rather pull pints than risk my life in dem woods, y'hear?",
+          "Anyway - here's ya drink."]
       }
     }
   ]

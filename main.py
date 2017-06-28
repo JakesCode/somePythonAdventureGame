@@ -15,6 +15,10 @@ class Game:
             for index in range(0, len(data["locations"])):
                 newLocation = Location(id_num = data["locations"][index]["id"], name = data["locations"][index]["name"])
 
+                # Add the directions to link certain locations together #
+                for direction in list(data["locations"][index]["directions"].keys()):
+                    newLocation.directions[direction] = data["locations"][index]["directions"][direction]
+
                 # Some locations have items - try/except block scans locations and adds them to Location objects #
                 try:
                     itemsToAdd = data["locations"][index]["items"]
@@ -90,15 +94,23 @@ class Game:
 
     def HUD(self):
         print("Current Location:", self.player.location.name)
-        print(self.player.health, "HP")
-        print("Map:", end=' ')
-        gameMap = list("-"*len(self.locations))
-        for x in range(0, len(gameMap)):
-            if x == self.player.position:
-                print("*", end="")
-            else:
-                print(gameMap[x], end="")
-        print("\n")
+        print(self.player.health, "HP\n")
+        # Draw Map #
+        directionArrows = ["↑", "↓", "←", "→"]
+        directionDisplay = [" ", " ", " ", " "]
+        for direction in list(self.player.location.directions.keys()):
+            if direction == "left":
+                directionDisplay[0] = directionArrows[2]
+            elif direction == "right":
+                directionDisplay[3] = directionArrows[3]
+            elif direction == "up":
+                directionDisplay[1] = directionArrows[0]
+            elif direction == "down":
+                directionDisplay[2] = directionArrows[2]
+        print(" ",directionDisplay[1]," ")
+        print(directionDisplay[0],"*",directionDisplay[3])
+        print(" ",directionDisplay[2]," ")
+
 
     def command(self, user):
         # Prevent any erroneous capitalisations #
@@ -107,16 +119,9 @@ class Game:
 
         # MOVE #
         if user[0] == "move":
-            if user[1] == "left":
-                if self.player.position == 0:
-                    print("Can't move left!")
-                else:
-                    self.player.advance(-1)
-            elif user[1] == "right":
-                if self.player.position+1 == len(self.locations):
-                    print("Can't move right!")
-                else:
-                    self.player.advance(1)
+            if user[1] in list(self.player.location.directions.keys()):
+                self.player.position = self.player.location.directions[user[1]]
+                print("Moved ",user[1],".", sep='')
 
         # LOOK #
         if user[0] == "look":
@@ -159,6 +164,7 @@ class Location:
         self.name = name
         self.items = {}
         self.events = {}
+        self.directions = {}
 
     def checkForEvents(self):
         if len(self.events) > 0:
@@ -195,13 +201,6 @@ class Player:
         self.location = None
         self.health = 50
         self.inventory = {}
-
-    def advance(self, direction):
-        self.position += int(direction)
-        if direction == 1:
-            print("Advanced to the right.")
-        else:
-            print("Moved to the left.")
 
     def displayInventory(self):
         for item in self.inventory:
@@ -256,6 +255,8 @@ class Dialogue:
             # The person saying the line #
             lengthOfLineCalculation = len(self.data["lines"][turn]) - len(self.characters[self.data["order"][turn]])
             lengthOfLine = int(round(lengthOfLineCalculation / 2))
+            if lengthOfLine*2 > 79:
+                lengthOfLine = int(round(79/2))-1
             print("-"*lengthOfLine + self.characters[self.data["order"][turn]] + "-"*lengthOfLine)
             # The line #
             print(self.data["lines"][turn], "\n")

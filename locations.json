@@ -2,9 +2,19 @@
   "locations": [
     {
       "id": 0,
-      "name": "Small Bedroom",
+      "name": "Bayrick Tavern - Bar",
       "items": [0],
-      "events": [0]
+      "events": [0],
+      "directions" : {
+        "left": 1
+      }
+    },
+    {
+      "id": 1,
+      "name": "Bayrick Tavern - Corridor",
+      "directions": {
+        "right": 0
+      }
     }
   ]
 }
