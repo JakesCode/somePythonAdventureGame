@@ -6,14 +6,25 @@
       "items": [0],
       "events": [0],
       "directions" : {
-        "left": 1
+        "left": 1,
+        "right": 2
       }
     },
     {
       "id": 1,
       "name": "Bayrick Tavern - Corridor",
+      "items": [1],
       "directions": {
         "right": 0
+      }
+    },
+    {
+      "id": 2,
+      "name": "Bayrick Tavern - Entrance",
+      "events": [1],
+      "people": [0],
+      "directions": {
+        "left": 0
       }
     }
   ]

@@ -58,6 +58,17 @@ class Game:
                 except:
                     pass
 
+                # Locations can also have people - try/except block adds these too #
+                try:
+                    people = data["locations"][index]["people"]
+                    for person in people:
+                        with open('people.json') as peopleFile:
+                            peopleData = json.load(peopleFile)["people"]
+                            newPerson = Person(id_num=peopleData[person]["id"], name=peopleData[person]["name"], events=peopleData[person]["events"])
+                            newLocation.people.append(newPerson)
+                except:
+                    pass
+
                 # Add to Game.locations dictionary #
                 self.locations[index] = newLocation
 
@@ -93,8 +104,7 @@ class Game:
             input()
 
     def HUD(self):
-        print("Current Location:", self.player.location.name)
-        print(self.player.health, "HP\n")
+        print("Current Location:", self.player.location.name,"\n")
         # Draw Map #
         directionArrows = ["↑", "↓", "←", "→"]
         directionDisplay = [" ", " ", " ", " "]
@@ -126,6 +136,7 @@ class Game:
         # LOOK #
         if user[0] == "look":
             self.player.location.displayItems()
+            self.player.location.displayPeople()
 
         # TAKE #
         if user[0] == "take":
@@ -153,6 +164,12 @@ class Game:
                     else:
                         print("Can't find that item.")
 
+        # TALK TO #
+        if user[0] == "talk" and user[1] == "to":
+            for person in range(0, len(self.player.location.people)):
+                if user[2] in list(self.player.location.people[person].name[person].lower().split(" ")):
+                    print("bingo")
+
         # INV / INVENTORY #
         if user[0] in ["inv", "inventory"]:
             self.player.displayInventory()
@@ -165,6 +182,7 @@ class Location:
         self.items = {}
         self.events = {}
         self.directions = {}
+        self.people = []
 
     def checkForEvents(self):
         if len(self.events) > 0:
@@ -184,22 +202,29 @@ class Location:
             for singleEvent in eventKeys:
                 if singleEvent == "speech":
                     self.events[event].execute(singleEvent)
+        # Events have completed - remove from events dictionary to avoid it happening multiple times #
         self.events.clear()
 
     def displayItems(self):
+        print("----"*2,"Items","----"*2)
         for item in list(self.items.keys()):
-            print("-"*len(self.items[item].description) + "-")
             print(self.items[item].name)
-            print(self.items[item].description)
-            print("-"*len(self.items[item].description) + "-")
+            print(self.items[item].description,"\n")
         if not(self.checkForItems()):
             print("No items here.")
+        print("-"*21 + "--")
+
+    def displayPeople(self):
+        print("\n")
+        print("----"*2,"People","----"*2)
+        for person in range(0, len(self.people)):
+            print(self.people[person].name[person])
+        print("-"*22 + "--")
 
 class Player:
     def __init__(self):
         self.position = 0
         self.location = None
-        self.health = 50
         self.inventory = {}
 
     def displayInventory(self):
@@ -262,6 +287,12 @@ class Dialogue:
             print(self.data["lines"][turn], "\n")
             offset = round(len(self.characters[self.data["order"][turn]])/4+1)
             input(' '*int(round(lengthOfLine+offset)) + "(cont.)")
+
+class Person:
+    def __init__(self, id_num, name, events):
+        self.id = id_num,
+        self.name = name,
+        self.events = events
 
 
 s("title Some Python Adventure Game")

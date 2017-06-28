@@ -11,6 +11,19 @@
           "I'd rather pull pints than risk my life in dem woods, y'hear?",
           "Anyway - here's ya drink."]
       }
+    },
+    {
+      "id": 1,
+      "characters": ["Tall Stranger", "Passer-by"],
+      "data": {
+        "order": [0, 0, 1, 0, 1, 0],
+        "lines": ["Oh my...",
+          "Oh my oh my oh my - I'm in deep trouble for this....",
+          "What's up?",
+          "My locket! It's gone! It's a family heirloom!",
+          "Well - where have you been since you last saw it?",
+          "Only inside for a drink! I showed someone whilst I was inside!"]
+      }
     }
   ]
 }

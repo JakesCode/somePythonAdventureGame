@@ -4,6 +4,11 @@
       "id": 0,
       "name": "Glass of Ale",
       "description": "It's not the best, but it's enough to pass as decent."
+    },
+    {
+      "id": 1,
+      "name": "Bronze Pendant",
+      "description": "This shouldn't be just lying around. It looks quite expensive."
     }
   ]
 }
